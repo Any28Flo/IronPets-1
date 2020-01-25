@@ -7,7 +7,7 @@ const userSchema = new Schema ({
   email : { type : String, required: true, maxlength:40, trim: true },
   password : { type: String, required: true, maxlength : 40 , trim:true},
   phone : { type: Number, required: true},
- // type : { type: String , required: true, maxlength:20},
+  type : { type: String , required: true, enum: ["perrera", "ironSavior"]},
   created: { type: Date, default: Date.now }
   
 })

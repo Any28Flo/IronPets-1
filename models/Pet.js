@@ -11,7 +11,8 @@ const pet = new Schema({
     type: Date,
     default: Date.now
   },
-
+/*   gaveUp: { type: Schema.type.Object, required: true, ref: 'User'},
+  adopted: { type: Schema.type.Object, ref: 'User'}, */
 
 })
 
