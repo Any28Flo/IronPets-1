@@ -15,7 +15,7 @@ router.get('/registerUser', (req, res) => {
 
 router.post('/registerUser' , (req,res) =>{
     const {name, email, password, phone} = req.body;
-    const newUser = new User({name, email, password, phone});
+    const newUser = new User({name, email, password, phone, type: "ironSavior"});
    console.log(newUser)
     newUser.save()
     .then(user =>{
