@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const User = require("../models/user");   // User model
+const User = require("./models/user");   // User model
 const bcrypt         = require("bcrypt"); // BCrypt to encrypt passwords
 const bcryptSalt     = 10;
 const ensureLogin = require("connect-ensure-login");
-
+/* 
 router.get("/login", (req, res, next) => {
   res.render("auth/login", { "message": req.flash("error") });
 });
@@ -24,9 +24,9 @@ router.post("/login", (req, res, next) => {
       errorMessage: "Please enter both, username and password to sign up."
     });
     return;
-  }
+  } */
 
-  User.findOne({ "username": theUsername })
+ /*  User.findOne({ "username": theUsername })
   .then(user => {
       if (!user) {
         res.render("auth/login", {
@@ -35,7 +35,7 @@ router.post("/login", (req, res, next) => {
         return;
       }
       if (bcrypt.compareSync(thePassword, user.password)) {
-        // Save the login in the session!
+         Save the login in the session!
         req.session.currentUser = user;
         res.redirect("/");
       } else {
@@ -47,20 +47,20 @@ router.post("/login", (req, res, next) => {
   .catch(error => {
     next(error);
   })
-});
+}); */
 
-router.get("/logout", (req, res, next) => {
+/* router.get("/logout", (req, res, next) => {
   req.session.destroy((err) => {
-    // cannot access session here
+     cannot access session here
     res.redirect("/login");
   });
-});
+}); */
 
-router.get("/private-page", ensureLogin.ensureLoggedIn(), (req, res) => {
+/* router.get("/private-page", ensureLogin.ensureLoggedIn(), (req, res) => {
   res.render("private", { user: req.user });
 });
 
-
+ */
 /* GET signUp */
 router.get('/', (req, res) => {
   console.log("auth")

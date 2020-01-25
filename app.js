@@ -8,7 +8,7 @@ const hbs          = require('hbs');
 const mongoose     = require('mongoose');
 const logger       = require('morgan');
 const path         = require('path');
-const Pet          = require('.models/pets');
+//const Pet          = require('.models/pets');
 const session      = require("express-session");
 const bcrypt       = require("bcrypt");
 const passport     = require("passport");
@@ -46,7 +46,7 @@ app.use(session({
 }));
 
 
-
+/* 
 passport.serializeUser((user, cb) => {
   cb(null, user._id);
 });
@@ -57,9 +57,9 @@ passport.deserializeUser((id, cb) => {
     cb(null, user);
   });
 });
-
+ */
 //Passport working put
-app.use(flash());
+/* app.use(flash());
 passport.use(new LocalStrategy({
   passReqToCallback: true
 }, (req, username, password, next) => {
@@ -76,12 +76,12 @@ passport.use(new LocalStrategy({
 
     return next(null, user);
   });
-}));
+})); */
 
 // Initialize the session
-app.use(passport.initialize());
+/* app.use(passport.initialize());
 app.use(passport.session());
-
+ */
 
 // Express View engine setup
 
@@ -114,10 +114,10 @@ const overview = require('./routes/overview.js');
 app.use('/', index);
 //app.use('/rutasUsuario',userRoutes );
 
-const pets = require('./routes/petList');
+/* const pets = require('./routes/petList');
 app.use('/petList', pets);
 
-
+ */
 router.get("/login", (req, res, next) => {
   res.render("login");
 });
