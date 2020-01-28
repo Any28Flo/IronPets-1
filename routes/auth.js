@@ -4,6 +4,8 @@ const bcrypt         = require("bcrypt"); // BCrypt to encrypt passwords
 const bcryptSalt     = 10;
 const ensureLogin = require("connect-ensure-login");
 const passport = require("passport");
+const Swal = require('sweetalert2')
+
 //Models
 const User = require("../models/User");   // User model
 
@@ -81,8 +83,13 @@ router.post('/registerUser' , (req,res) =>{
  const newUser = new User({name, email, password, phone});
    newUser.save()
   .then(user =>{
+    Swal.fire(
+      'User created succefully',
+      'That thing is still around?',
+      'question'
+    )
     console.log("New usser created succefully");
-    res.render('/index')
+    res.render('overview/index')
   }) 
 
 })
