@@ -9,7 +9,7 @@ router.get('/', (req, res) => {
   Pet.find()
   .then(allPets =>{
     console.log(allPets)
-    res.render('overview/allPets', {pets : allPets});
+    res.render('overview/index', {pets : allPets});
   })
   .catch(err =>{
     console.log(`Error${err}`)
