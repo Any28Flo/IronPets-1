@@ -75,7 +75,7 @@ router.get('/registerUser', (req, res) => {
 
 router.post('/registerUser' , (req,res) =>{
   console.log(req.body);
- //res.render("");
+  res.render("/overview");
 })
 module.exports = router;
 

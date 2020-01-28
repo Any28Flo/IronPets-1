@@ -1,3 +1,5 @@
+
+//Require libraries
 require('dotenv').config();
 const flash = require("connect-flash");
 const bodyParser   = require('body-parser');
@@ -8,19 +10,23 @@ const hbs          = require('hbs');
 const mongoose     = require('mongoose');
 const logger       = require('morgan');
 const path         = require('path');
-const Pet          = require('./models/Pet');
-const User          = require('./models/User');
 const session      = require("express-session");
 const bcrypt       = require("bcrypt");
 const passport     = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const router = express.Router();
+/* Router */
+const index = require('./routes/index');
+const auth = require('./routes/auth.js');
+const overview = require('./routes/overview.js');
+const allPets = require('./routes/allPets.js');
 
-
-//mongoose.Promise = Promise;
-
+/* Models */
+const Pet          = require('./models/Pet');
+const User         = require('./models/User');
+//Mongo config
 mongoose
-  .connect('mongodb+srv://userAdminJp:ironpets923@cluster0-o48uv.mongodb.net/test?retryWrites=true&w=majority', {useNewUrlParser: true})
+  .connect('mongodb://localhost/ironPets', {useNewUrlParser: true})
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })
@@ -28,6 +34,8 @@ mongoose
     console.error('Error connecting to mongo', err)
   });
 
+  //Midelware
+  
 const app_name = require('./package.json').name;
 const debug = require('debug')(`${app_name}:${path.basename(__filename).split('.')[0]}`);
 
@@ -104,25 +112,28 @@ app.use(express.static('public'));
 
 // default value for title local
 app.locals.title = 'Iron Pets';
-
-
-
-const index = require('./routes/index');
-const auth = require('./routes/auth.js');
-const overview = require('./routes/overview.js');
-
+//Declare partials
+hbs.registerPartials(__dirname + '/views/partials');
 
 //Routes
 app.use('/', index);
-//app.use('/rutasUsuario',userRoutes );
+app.use('/auth', auth );
+app.use('/overview', overview );
+app.use('/allPets', allPets );
 
-/* const petList = require('./routes/petList');
-app.use('/petList', pets);
-
- */
 router.get("/login", (req, res, next) => {
   res.render("login");
 });
+
+
+
+//app.use('/rutasUsuario',userRoutes );
+
+/* 
+app.use('/petList', pets);
+
+ */
+
 
 router.post("/login", passport.authenticate("local", {
   successRedirect: "/",
@@ -131,8 +142,7 @@ router.post("/login", passport.authenticate("local", {
   passReqToCallback: true
 }));
 
-app.use('/auth', auth );
-app.use('/overview', overview );
+
 
 app.listen(3000, ()=> console.log("Server ready, happy code :3"))
 
