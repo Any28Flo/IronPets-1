@@ -1,10 +1,12 @@
 const express = require("express");
 const router = express.Router();
-const User = require("../models/User");   // User model
 const bcrypt         = require("bcrypt"); // BCrypt to encrypt passwords
 const bcryptSalt     = 10;
 const ensureLogin = require("connect-ensure-login");
 const passport = require("passport");
+//Models
+const User = require("../models/User");   // User model
+
 
 router.get("/login", (req, res, next) => {
   res.render("auth/login", { "message": req.flash("error") });
@@ -75,9 +77,14 @@ router.get('/registerUser', (req, res) => {
 
 router.post('/registerUser' , (req,res) =>{
   console.log(req.body);
-  var currentPath = process.cwd();
-  console.log(currentPath)
-  res.render('overview/index')
+  const {name, email, password, phone} = req.body;
+ const newUser = new User({name, email, password, phone});
+   newUser.save()
+  .then(user =>{
+    console.log("New usser created succefully");
+    res.render('/index')
+  }) 
+
 })
 module.exports = router;
 
