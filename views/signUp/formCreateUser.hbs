@@ -15,6 +15,16 @@
         <div class="form-group">
           <input type="number" name="phone" class="form-control" placeholder="Télefono"  pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
         </div>
+        <div class="form-group">
+          <select id="userType" name="type" class="custom-select" required>
+                <option value="">Soy:</option>
+                <option value="ironSaver">ironSaver</option>
+                <option value="Refugio">Refugio</option>
+            </select>
+        </div>
+         <div id="Refugio" class="form-group direction" style="display:none">
+          <input type="text" name="direction" class="form-control" placeholder="Dirección del refugio"  pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
+        </div>
         <button type="submit" class="btn btn-primary">Crear nueva cuenta</button>
       </form>
   </div>

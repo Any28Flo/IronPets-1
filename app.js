@@ -127,14 +127,6 @@ router.get("/login", (req, res, next) => {
 
 
 
-//app.use('/rutasUsuario',userRoutes );
-
-/* 
-app.use('/petList', pets);
-
- */
-
-
 router.post("/login", passport.authenticate("local", {
   successRedirect: "/",
   failureRedirect: "/login",
