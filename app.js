@@ -14,14 +14,10 @@ const session      = require("express-session");
 const bcrypt       = require("bcrypt");
 const passport     = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
-const FacebookStrategy  =     require('passport-facebook').Strategy;
-const GoogleStrategy = require("passport-google-oauth20").Strategy;
-
-const MongoStore = require("connect-mongo")(session);
 
 mongoose.Promise = Promise;
 mongoose
-  .connect('mongodb+srv://userAdminJp:ironpets923@cluster0-o48uv.mongodb.net/test?retryWrites=true&w=majority', {useNewUrlParser: true,  useUnifiedTopology: true})
+  .connect(`${process.env.DB_Conection}`, {useNewUrlParser: true,  useUnifiedTopology: true})
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })
@@ -43,7 +39,7 @@ app.use(cookieParser());
 //Configure the express session
 app.use(session({
   //Meterlo en el .env
-  secret: "our-passport-local-strategy-app",
+  secret: `${process.env.SESSION}`,
   resave: true,
   saveUninitialized: true
 }));
