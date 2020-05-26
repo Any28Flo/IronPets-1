@@ -12,3 +12,10 @@ npm-debug.log
 !.vscode/launch.json
 !.vscode/extensions.json
 *.code-workspace
+# auto-import.
+.idea/modules.xml
+.idea/vcs.xml
+.idea/*.iml
+.idea/modules
+*.iml
+*.ipr
